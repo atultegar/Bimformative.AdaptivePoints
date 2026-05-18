@@ -1,0 +1,111 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<UseWPF>true</UseWPF>
+
+		<RootNamespace>AdaptivePoints</RootNamespace>
+
+		<Configurations>
+			Debug;Release;Debug-Revit2023;Debug-Revit2024;Debug-Revit2025;Debug-Revit2026;
+			Release-Revit2023;Release-Revit2024;Release-Revit2025;Release-Revit2026
+		</Configurations>
+
+		<Platforms>x64</Platforms>
+
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>		
+	</PropertyGroup>
+
+	<!--Revit version selection-->
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug-Revit2023' or '$(Configuration)' == 'Release-Revit2023'">
+		<RevitVersion>2023</RevitVersion>
+		<RevitPath>C:\Program Files\Autodesk\Revit 2023</RevitPath>
+		<DefineConstants>$(DefineConstants);REVIT2023;NET48</DefineConstants>
+		<TargetFramework>net48</TargetFramework>
+		<AssemblyName>AdaptivePoints2023</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug-Revit2024' or '$(Configuration)' == 'Release-Revit2024'">
+		<RevitVersion>2024</RevitVersion>
+		<RevitPath>C:\Program Files\Autodesk\Revit 2024</RevitPath>
+		<DefineConstants>$(DefineConstants);REVIT2024;NET48</DefineConstants>
+		<TargetFramework>net48</TargetFramework>
+		<AssemblyName>AdaptivePoints2024</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug-Revit2025' or '$(Configuration)' == 'Release-Revit2025'">
+		<RevitVersion>2025</RevitVersion>
+		<RevitPath>C:\Program Files\Autodesk\Revit 2025</RevitPath>
+		<DefineConstants>$(DefineConstants);REVIT2025;NET8_0_WINDOWS</DefineConstants>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<AssemblyName>AdaptivePoints2025</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug-Revit2026' or '$(Configuration)' == 'Release-Revit2026'">
+		<RevitVersion>2026</RevitVersion>
+		<RevitPath>C:\Program Files\Autodesk\Revit 2026</RevitPath>
+		<DefineConstants>$(DefineConstants);REVIT2026;NET8_0_WINDOWS</DefineConstants>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<AssemblyName>AdaptivePoints2026</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug' or '$(Configuration)' == 'Release'">
+		<RevitPath>C:\Program Files\Autodesk\Revit 2025</RevitPath>
+		<DefineConstants>$(DefineConstants);REVIT2025;NET8_0_WINDOWS</DefineConstants>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<AssemblyName>AdaptivePoints2025</AssemblyName>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Reference Include="RevitAPI">
+			<HintPath>$(RevitPath)\RevitAPI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="RevitAPIUI">
+			<HintPath>$(RevitPath)\RevitAPIUI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="RevitNodes">
+			<HintPath>$(RevitPath)\AddIns\DynamoForRevit\Revit\RevitNodes.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="RevitServices">
+			<HintPath>$(RevitPath)\AddIns\DynamoForRevit\Revit\RevitServices.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="DynamoCore">
+			<HintPath>$(RevitPath)\AddIns\DynamoForRevit\DynamoCore.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="DynamoCoreWpf">
+			<HintPath>$(RevitPath)\AddIns\DynamoForRevit\DynamoCoreWpf.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="DynamoServices">
+			<HintPath>$(RevitPath)\AddIns\DynamoForRevit\DynamoServices.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="ProtoGeometry">
+			<HintPath>$(RevitPath)\AddIns\DynamoForRevit\ProtoGeometry.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		
+		
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AdaptivePoints.Core\AdaptivePoints.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\" />
+	  <Folder Include="Nodes\" />
+	  <Folder Include="UI\ViewModels\" />
+	</ItemGroup>	
+	
+</Project>

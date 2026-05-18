@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="AdaptivePoints.Core/AdaptivePoints.Core.csproj" />
+  <Project Path="AdaptivePoints/AdaptivePoints.csproj">
+    <BuildType Solution="Debug|*" Project="Debug-Revit2023" />
+    <BuildType Solution="Release|*" Project="Release-Revit2026" />
+    <Platform Project="x64" />
+  </Project>
+</Solution>
