@@ -1,17 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<UseWPF>true</UseWPF>
-
+		
 		<RootNamespace>AdaptivePoints</RootNamespace>
+
+		<Platforms>x64</Platforms>
+
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<LangVersion>latest</LangVersion>
+
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+
+		<Deterministic>true</Deterministic>
+
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
 
 		<Configurations>
 			Debug;Release;Debug-Revit2023;Debug-Revit2024;Debug-Revit2025;Debug-Revit2026;
 			Release-Revit2023;Release-Revit2024;Release-Revit2025;Release-Revit2026
 		</Configurations>
+		
+	</PropertyGroup>
 
-		<Platforms>x64</Platforms>
-
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>		
+	<PropertyGroup>
+		<BuildRoot>C:\Projects\Bimformative.AdaptivePoints\build\AdaptivePoints</BuildRoot>
 	</PropertyGroup>
 
 	<!--Revit version selection-->
@@ -21,6 +40,8 @@
 		<DefineConstants>$(DefineConstants);REVIT2023;NET48</DefineConstants>
 		<TargetFramework>net48</TargetFramework>
 		<AssemblyName>AdaptivePoints2023</AssemblyName>
+		<OutputPath>$(BuildRoot)\Revit2023\bin\</OutputPath>
+		<DocumentationFile>$(OutputPath)\AdaptivePoints2023.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug-Revit2024' or '$(Configuration)' == 'Release-Revit2024'">
@@ -29,6 +50,8 @@
 		<DefineConstants>$(DefineConstants);REVIT2024;NET48</DefineConstants>
 		<TargetFramework>net48</TargetFramework>
 		<AssemblyName>AdaptivePoints2024</AssemblyName>
+		<OutputPath>$(BuildRoot)\Revit2024\bin\</OutputPath>
+		<DocumentationFile>$(OutputPath)\AdaptivePoints2024.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug-Revit2025' or '$(Configuration)' == 'Release-Revit2025'">
@@ -37,6 +60,8 @@
 		<DefineConstants>$(DefineConstants);REVIT2025;NET8_0_WINDOWS</DefineConstants>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<AssemblyName>AdaptivePoints2025</AssemblyName>
+		<OutputPath>$(BuildRoot)\Revit2025\bin\</OutputPath>
+		<DocumentationFile>$(OutputPath)\AdaptivePoints2025.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug-Revit2026' or '$(Configuration)' == 'Release-Revit2026'">
@@ -45,6 +70,8 @@
 		<DefineConstants>$(DefineConstants);REVIT2026;NET8_0_WINDOWS</DefineConstants>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<AssemblyName>AdaptivePoints2026</AssemblyName>
+		<OutputPath>$(BuildRoot)\Revit2026\bin\</OutputPath>
+		<DocumentationFile>$(OutputPath)\AdaptivePoints2026.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug' or '$(Configuration)' == 'Release'">
@@ -106,6 +133,26 @@
 	  <Folder Include="Models\" />
 	  <Folder Include="Nodes\" />
 	  <Folder Include="UI\ViewModels\" />
-	</ItemGroup>	
+	</ItemGroup>
+
+	<Target Name="CopyPackageFiles" AfterTargets="Build">
+
+		<PropertyGroup>
+			<PackageRoot>$(BuildRoot)\Revit$(RevitVersion)</PackageRoot>
+		</PropertyGroup>
+		
+		<!--Create folders-->
+		<MakeDir Directories="$(PackageRoot)\doc" />
+		<MakeDir Directories="$(PackageRoot)\dyf" />
+		<MakeDir Directories="$(PackageRoot)\extra" />
+		
+		<!--Copy README-->
+		<!--<Copy SourceFiles="$(MSBuildProjectDirectory)\README.md" DestinationFolder="$(PackageRoot)\doc" SkipUnchangedFiles="true" />-->
+
+		<!--Copy pkg.json-->
+		<!--<Copy SourceFiles="$(MSBuildProjectDirectory)\pkg.json" DestinationFolder="$(PackageRoot)" SkipUnchangedFiles="true" />-->	
+		
+			  
+	</Target>
 	
 </Project>
